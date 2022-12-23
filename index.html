@@ -26,7 +26,7 @@
                 let max_temp = document.getElementById("max_temp");
                 let min_temp = document.getElementById("min_temp");
 
-                span.textContent = String((Math.floor((Math.random() * ((Number(max_temp.value) - Number(min_temp.value)) + 0.1) + Number(min_temp.value)) * 10) / 10).toFixed(1))+ "℃";
+                span.textContent = String((Math.floor((Math.random() * (Number(max_temp.value + 0.1) - Number(min_temp.value)) + Number(min_temp.value)) * 10) / 10).toFixed(1))+ "℃";
             }
         }
 
