@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体温生成サイト!!</title>
+
+    <script type="text/javascript">
+        function log(id){
+            let temp = document.getElementById(id);
+            console.log(temp.value);
+            temp.value = Number(temp.value).toFixed(1);
+        }
+
+        function generate(){
+            frequency = document.getElementById("frequency");
+
+            for (let i = 0; i < Number(frequency.value);i++){
+                let list = document.getElementById("list");
+
+                let tr = list.appendChild(document.createElement("tr"));
+                let td = tr.appendChild(document.createElement("td"));
+                let span = td.appendChild(document.createElement("span"));
+                td.style = "text-align:center";
+
+                let max_temp = document.getElementById("max_temp");
+                let min_temp = document.getElementById("min_temp");
+
+                span.textContent = String((Math.floor((Math.random() * (Number(max_temp.value) - Number(min_temp.value)) + Number(min_temp.value)) * 10) / 10).toFixed(1))+ "℃";
+            }
+        }
+
+        function reset(){
+            let list = document.getElementById("list");
+            let colone = list.cloneNode(false)
+            list.after(colone)
+            list.remove()
+        }
+    </script>
+</head>
+<body>
+    <h1>体温生成サイト!!</h1>
+    <p>
+        <input type="number" id="min_temp" name="min_temp" min="0" value="36.0" step="0.1" onchange='log("min_temp")'>
+        <span>℃から</span>
+        <input type="number" id="max_temp" name="max_temp" min="0" value="36.8" step="0.1" onchange='log("max_temp")'>
+        <span>℃まで</span>
+    </p>
+    <p>
+        <input type="number" id="frequency" name="frequency" value="10" step="1" min="0">
+        <input type="button" id="generate" name="generate" value="生成!" onclick="reset();generate()">
+    </p>
+    <p>
+        <table id="list" name="list" border="1" style="border-collapse: collapse">
+        </table>
+    </p>
+</body>
+</html>
